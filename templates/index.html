@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Job Description Skill Analyzer</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <h1>Job Description Skill Analyzer</h1>
+            <p>Analyze your skills and identify your job skill gaps</p>
+        </div>
+
+
+        <!-- Input Section -->
+        <div class="card">
+
+            <form method="POST">
+
+                <h2>Job Description</h2>
+
+                <textarea
+                    name="job_description"
+                    placeholder="Paste the job description here..."
+                    required
+                ></textarea>
+
+                <h2>Candidate Skills</h2>
+
+                <input
+                    type="text"
+                    name="candidate_skills"
+                    placeholder="Example: Python, SQL, Excel"
+                    required
+                >
+
+                <button type="submit">
+                    Analyze Skills
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- Error Message -->
+        {% if error %}
+
+        <div class="card error-card">
+
+            <h2>⚠️ Attention</h2>
+
+            <p>{{ error }}</p>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- Results Section -->
+        {% if required_skills %}
+
+        <div class="card">
+
+            <h2>Analysis Results</h2>
+
+            <div class="results">
+
+                <!-- Required Skills -->
+                <div class="result-box">
+                    <h3>Required Skills</h3>
+                    <p>{{ required_skills }}</p>
+                </div>
+
+
+                <!-- Candidate Skills -->
+                <div class="result-box">
+                    <h3>Candidate Skills</h3>
+                    <p>{{ candidate_skills }}</p>
+                </div>
+
+
+                <!-- Matched Skills -->
+                <div class="result-box">
+                    <h3>Matched Skills</h3>
+                    <p>{{ matched_skills }}</p>
+                </div>
+
+
+                <!-- Missing Skills -->
+                <div class="result-box">
+                    <h3>Missing Skills</h3>
+                    <p>{{ missing_skills }}</p>
+                </div>
+
+
+                <!-- Match Percentage -->
+                <div class="match-box">
+
+                    <h3>Overall Skill Match</h3>
+
+                    <div class="match-score">
+                        {{ match_percentage }}%
+                    </div>
+
+                    <p>Your current skill match with this job description</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- Footer -->
+        <div class="footer">
+            Job Description Skill Analyzer • Version 2
+        </div>
+
+    </div>
+
+</body>
+
+</html>
